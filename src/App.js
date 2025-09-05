@@ -1,5 +1,4 @@
-
-import { useState,useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import LocationDisplay from './components/LocationDisplay';
 import Home from './pages/Home';
@@ -22,8 +21,6 @@ function App() {
   const [pressureUnit, setPressureUnit] = useState("mb");
   const [visibilityUnit, setVisibilityUnit] = useState("km");
   const [speedUnit, setSpeedUnit] = useState("kmh");
-
-  import { useState, useEffect, useCallback } from 'react';
 
   const handleSubmit = useCallback(async () => {
       fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3`)
