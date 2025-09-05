@@ -23,27 +23,26 @@ function App() {
   const [visibilityUnit, setVisibilityUnit] = useState("km");
   const [speedUnit, setSpeedUnit] = useState("kmh");
 
-  const handleSubmit=async()=>{
-      fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3`).then(res=>
-        {
-          if(res.ok)
-          {
+  import { useState, useEffect, useCallback } from 'react';
+
+  const handleSubmit = useCallback(async () => {
+      fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3`)
+        .then(res => {
+          if (res.ok) {
             return res.json();
+          } else if (res.status === 404) {
+            alert('oops! data not found');
+          } else {
+            alert('Server Error');
           }
-          else if(res.status===404)
-          {
-            return alert('opps!data not found');
-          }
-          else
-          {
-            return alert('Server Error');
-          }
-        }).then(data=>
-        {
+        })
+        .then(data => {
           console.log(data);
           setWeather(data);
-        }).catch(error=>console.log(error));
-    }
+        })
+        .catch(error => console.log(error));
+    }, [location, key]);   // dependencies
+
 
     const handleClick=async(lat,lag)=>{
       setLocation(lat+","+lag);
@@ -53,7 +52,8 @@ function App() {
       if (location) {
         handleSubmit();
       }
-    }, [location]); 
+    }, [location, handleSubmit]);
+
 
   return (
     <div className="App">
