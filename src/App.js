@@ -23,7 +23,7 @@ function App() {
   const [speedUnit, setSpeedUnit] = useState("kmh");
 
   const handleSubmit = useCallback(async () => {
-      fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3`)
+      fetch(`https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3`)
         .then(res => {
           if (res.ok) {
             return res.json();
