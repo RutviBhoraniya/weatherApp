@@ -24,8 +24,7 @@ function App() {
   const [speedUnit, setSpeedUnit] = useState("kmh");
 
   const handleSubmit=async()=>{
-      fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3`).
-      then(res=>
+      fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=3`).then(res=>
         {
           if(res.ok)
           {
@@ -39,13 +38,11 @@ function App() {
           {
             return alert('Server Error');
           }
-        }).
-      then(data=>
+        }).then(data=>
         {
           console.log(data);
           setWeather(data);
-        }).
-      catch(error=>console.log(error));
+        }).catch(error=>console.log(error));
     }
 
     const handleClick=async(lat,lag)=>{
